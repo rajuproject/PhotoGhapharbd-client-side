@@ -1,10 +1,13 @@
 import { Card, Label, Textarea } from 'flowbite-react';
 
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { AuthContext } from '../FireBase/UserContext';
 
 const SingleService = () => {
+    const  user  = useContext(AuthContext);
+
     const router = useParams();
     const [product, setProduct] = useState({});
     const { id } = router;
@@ -144,7 +147,17 @@ const SingleService = () => {
 
             <div className='container mx-auto my-12'>
                 <div className='flex items-center '>
-                    <img className="mask mask-squircle w-12" src="https://placeimg.com/160/160/arch" />
+
+                {user?.photoURL ?
+                                <Image
+                                    style={{ height: '40px' }}
+                                    roundedCircle
+                                    src={user?.photoURL}>
+                                </Image>
+                                : <FaUser></FaUser>
+                            }
+
+                    {/* <img className="mask mask-squircle w-12" src="https://placeimg.com/160/160/arch" /> */}
 
                 </div>
 
@@ -158,7 +171,21 @@ const SingleService = () => {
                         </div> 
         
                         <div className="form-control mt-6">
+
+                        {
+                            user?.uid ?
+                            <>
                             <button onClick={handleDetails} className="btn w-32 btn-primary">Comment</button>
+                            </>
+                            :
+                            <>
+                            <Link to='/login' className='btn'>Log in</Link>
+                            </>
+                        }
+
+                
+
+                            
                         </div>
                     </form>
                 </div>
