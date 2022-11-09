@@ -5,6 +5,7 @@ import ErrorPage from "../../ErrorPage/ErrorPage";
 import ProductsAdd from "../../Products add/ProductsAdd";
 import Register from "../../Register/Register";
 import SignIn from "../../SignIn/SignIn";
+import SingleService from "../../SingleService/SingleService";
 
 
 const { createBrowserRouter } = require("react-router-dom");
@@ -40,6 +41,10 @@ export const routes = createBrowserRouter([
             {
                 path:'/register',
                 element:<Register></Register>
+            },
+            {
+                path:'/details/:id',
+                element:<SingleService></SingleService>
             }
         ]
     }

@@ -1,11 +1,14 @@
 import { Card } from 'flowbite-react';
+import { PhotoProvider, PhotoView } from 'react-photo-view';
+import 'react-photo-view/dist/react-photo-view.css';
+
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const AllProducts = () => {
 
-    const [porducts, setProducts] = useState([]);
+    const [products, setProducts] = useState([]);
     const [refresh, setRefresh] = useState(false)
     
 
@@ -25,35 +28,49 @@ const AllProducts = () => {
     }, [refresh]);
 
 
-    const handleDelete = (id) => {
-        fetch(`http://localhost:5000/product/${id}`, {
-          method: "DELETE",
-        })
-        .then(res => res.json())
-        .then(data => {
-          if(data.success){
-            toast.success(data.message);
-            setRefresh(!refresh);
-          } else {
-            toast.error(data.error);}}).catch(err => toast.error(err.message))};
+    // const handleDelete = (id) => {
+    //     fetch(`http://localhost:5000/product/${id}`, {
+    //       method: "DELETE",
+    //     })
+    //     .then(res => res.json())
+    //     .then(data => {
+    //       if(data.success){
+    //         toast.success(data.message);
+    //         setRefresh(!refresh);
+    //       } else {
+    //         toast.error(data.error);}})
+    //         .catch(err => toast.error(err.message))};
+
+
+
       const navigate = useNavigate();
-      const handleEdit = (id) => {
-        navigate(`/product/edit/${id}`)
+      const handleDetails = (id) => {
+        navigate(`/details/${id}`)
       }
+
+
     return (
-        <div className=" container mx-auto px-4 grid gap-4 md:grid-cols-3 sm:grid-cols-1 lg:grid-cols-4 ">
+        <div className=" container grid mx-auto px-4 grid gap-4 md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-3 ">
          {
-            porducts.map((product)=>{  
+            products.map((product)=>{  
                 return(
                 <Card 
                 key={product._id}>
-                <img className="w-20" src={product.image}  alt={product.name}/>
+
+
+<PhotoProvider>
+      <PhotoView src="/1.jpg">
+      <img src={product.image}  alt={product.name}/>
+      </PhotoView>
+    </PhotoProvider>
+
+                {/* <img className="" src={product.image}  alt={product.name}/> */}
 
 
                 <a href="#">
                     
                   <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                    Apple Watch Series 7 GPS, Aluminium Case, Starlight Sport
+                    {product.details}
                   </h5>
                 </a>
                 <div className="mt-2.5 mb-5 flex items-center">
@@ -103,20 +120,20 @@ const AllProducts = () => {
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-3xl font-bold text-gray-900 dark:text-white">
-                    $599
+                    ${product.price}
                   </span>
-                  <button onClick={() => handleDelete(product._id)}
+                  {/* <button onClick={() => handleDelete(product._id)}
                     className="rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     Delete
-                  </button>
-                  <button onClick={() => handleEdit(product._id)}
+                  </button> */}
+                  <button onClick={() => handleDetails(product._id)}
                     className="rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Update
+                    Details
                   </button>
-                  <button 
+                  {/* <button 
                     className="rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     <Link to="/add">Add</Link> 
-                  </button>
+                  </button> */}
                 </div>
               </Card>
                 )
