@@ -1,4 +1,5 @@
 import AllProducts from "../../AllProducts/AllProducts";
+import Blogs from "../../Blogs/Blogs";
 import EditProduct from "../../EditProduct/EditProduct";
 import ErrorPage from "../../ErrorPage/ErrorPage";
 
@@ -45,6 +46,10 @@ export const routes = createBrowserRouter([
             {
                 path:'/details/:id',
                 element:<SingleService></SingleService>
+            },
+            {
+                path:'/blogs',
+                element:<Blogs></Blogs>
             }
         ]
     }

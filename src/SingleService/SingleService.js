@@ -1,48 +1,54 @@
-import { Card, Label, Textarea } from 'flowbite-react';
+import { Card } from 'flowbite-react';
 
 import React, { useContext, useEffect, useState } from 'react';
+
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../FireBase/UserContext';
 
+
+
+
 const SingleService = () => {
-    const  user  = useContext(AuthContext);
+    const {user} = useContext(AuthContext);
+
+    console.log(user?.email)
 
     const router = useParams();
     const [product, setProduct] = useState({});
     const { id } = router;
     const navigate = useNavigate();
 
-    const handleDetails = (e, id)=> {
+    const handleDetails = (e, id) => {
         e.preventDefault();
         const products = {
             comment: e.target.name.value
-            
+
             // price: parseInt(e.target.price.value),
             // image: e.target.image.value,
 
         }
         console.log(id)
-       
+
         console.log(products)
 
         fetch("http://localhost:5000/details/", {
-            method:"POST",
-            headers:{
+            method: "POST",
+            headers: {
                 'content-type': 'application/json'
             },
-            body:JSON.stringify(products)
+            body: JSON.stringify(products)
         }).then(res => res.json())
-            .then(data =>{
-                if(data.success){
+            .then(data => {
+                if (data.success) {
                     toast.success(data.message)
                     // navigate("/allproduct")
                 }
-                else{
+                else {
                     toast.error(data.error);
                 }
             })
-            .catch(err =>{
+            .catch(err => {
                 toast.error(err.message)
             })
 
@@ -128,7 +134,7 @@ const SingleService = () => {
                     </span>
                     <button
                         className=" rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        <Link  to="/allProduct">ALL SERVICE</Link>
+                        <Link to="/allProduct">ALL SERVICE</Link>
                     </button>
                 </div>
             </Card>
@@ -142,57 +148,33 @@ const SingleService = () => {
                 </div>
             </div>
 
-
-
-
-            <div className='container mx-auto my-12'>
-                <div className='flex items-center '>
-
-                {user?.photoURL ?
-                                <Image
-                                    style={{ height: '40px' }}
-                                    roundedCircle
-                                    src={user?.photoURL}>
-                                </Image>
-                                : <FaUser></FaUser>
-                            }
-
-                    {/* <img className="mask mask-squircle w-12" src="https://placeimg.com/160/160/arch" /> */}
-
-                </div>
-
                 <div>
-                    <form >
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Name</span>
-                            </label>
-                            <input type="text" placeholder="Enter your comment"  name='name' className="input input-bordered w-96" />
-                        </div> 
-        
-                        <div className="form-control mt-6">
-
-                        {
-                            user?.uid ?
+                    {
+                        user?.uid ?
                             <>
-                            <button onClick={handleDetails} className="btn w-32 btn-primary">Comment</button>
+                                <form >
+                                    <div className="form-control">
+                                        <label className="label">
+                                            <span className="label-text">{user?.name}</span>
+                                        </label>
+                                        <input type="text" placeholder="Enter your comment" name='name' className="input input-bordered w-96" />
+                                        <button onClick={handleDetails} className="btn w-32 btn-primary">Comment</button>
+                                    </div>
+
+                                    <div className="form-control mt-6">
+                                    </div>
+                                </form>
                             </>
                             :
                             <>
-                            <Link to='/login' className='btn'>Log in</Link>
+                                 <Link to='/signIn'> <p>Please log in for comment</p> Log in</Link>
                             </>
-                        }
-
-                
-
-                            
-                        </div>
-                    </form>
+                    }
                 </div>
 
             </div>
 
-        </div>
+        // </div>
     );
 };
 
@@ -200,3 +182,24 @@ export default SingleService;
 
 
 // onClick={() => handleDetails(product._id)}
+// {
+//     user?.uid ?
+//     <>
+//        <form >
+// <div className="form-control">
+// <label className="label">
+//     <span className="label-text">Name</span>
+// </label>
+// <input type="text" placeholder="Enter your comment"  name='name' className="input input-bordered w-96" />
+// <button onClick={handleDetails} className="btn w-32 btn-primary">Comment</button>
+// </div>
+
+// <div className="form-control mt-6">
+// </div>
+// </form>
+//     </>
+//     :
+//     <>
+//     <p>Please log in for comment</p> <Link to='/signIn' className='btn'>Log in</Link>
+//     </>
+// }
