@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../assets/logo.svg'
+import logo from '../assets/20221005_142913.png'
 
 const Footer = () => {
     return (
@@ -29,8 +29,8 @@ const Footer = () => {
       </footer> 
       <footer className="footer px-10 py-4 border-t bg-base-200 text-base-content border-base-300">
         <div className="items-center grid-flow-col">
-        <Link><img src={logo} alt={logo} /> </Link> 
-          <p>ACME Industries Ltd. <br/>Providing reliable tech since 1992</p>
+        <Link><img className='w-60' src={logo} alt={logo} /> </Link> 
+          <p>PhotoGrapharBD <br/>Copyright PhotoGrapharBD</p>
         </div> 
         <div className="md:place-self-center md:justify-self-end">
           <div className="grid grid-flow-col gap-4">
