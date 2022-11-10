@@ -90,12 +90,13 @@ const SingleService = () => {
         fetch(`http://localhost:5000/comment/${id}`)
             .then((res) => res.json())
             .then((data) => {
-                // if (data.success) {
-                //     setComment(data.data);
-                // } else {
-                //     toast.error(data.error);
                 console.log(data)
-                // }
+                if (data.success) {
+                    setComment(data.data);
+                } else {
+                    toast.error(data.error);
+                
+                }
             })
             .catch((err) => toast.error(err.message));
     }, [id]);
