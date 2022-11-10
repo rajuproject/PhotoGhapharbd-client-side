@@ -1,4 +1,5 @@
 import { Card } from 'flowbite-react';
+import { comment } from 'postcss';
 
 import React, { useContext, useEffect, useState } from 'react';
 
@@ -12,27 +13,44 @@ import { AuthContext } from '../FireBase/UserContext';
 const SingleService = () => {
     const {user} = useContext(AuthContext);
 
-    console.log(user?.email)
+
+
 
     const router = useParams();
     const [product, setProduct] = useState({});
+
+    const [comment, setComment] = useState({});
+    
+
     const { id } = router;
     const navigate = useNavigate();
 
-    const handleDetails = (e, id) => {
+    // const handleDetails = (e) => {
+    //     e.preventDefault();
+    //     const products = {
+    //         comment: e.target.name.value
+
+        
+           
+           
+    //     }
+        
+    const handleSubmit = (e) => {
         e.preventDefault();
         const products = {
-            comment: e.target.name.value
+            name: e.target.name.value,
+            serviceId: id,
+            userName:user.displayName,
+            userEmail:user.email,
+            userPhoto: user.photoURL, 
 
-            // price: parseInt(e.target.price.value),
-            // image: e.target.image.value,
 
         }
-        console.log(id)
+    
 
-        console.log(products)
+       
 
-        fetch("http://localhost:5000/details/", {
+        fetch("http://localhost:5000/comment", {
             method: "POST",
             headers: {
                 'content-type': 'application/json'
@@ -67,6 +85,25 @@ const SingleService = () => {
             .catch((err) => toast.error(err.message));
     }, [id]);
 
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/comment/${id}`)
+            .then((res) => res.json())
+            .then((data) => {
+                // if (data.success) {
+                //     setComment(data.data);
+                // } else {
+                //     toast.error(data.error);
+                console.log(data)
+                // }
+            })
+            .catch((err) => toast.error(err.message));
+    }, [id]);
+
+   
+
+
+    
 
 
 
@@ -148,35 +185,29 @@ const SingleService = () => {
                 </div>
             </div>
 
-                <div>
-                    {
-                        user?.uid ?
-                            <>
-                                <form >
-                                    <div className="form-control">
-                                        <label className="label">
-                                            <span className="label-text">{user?.name}</span>
-                                        </label>
-                                        <input type="text" placeholder="Enter your comment" name='name' className="input input-bordered w-96" />
-                                        <button onClick={handleDetails} className="btn w-32 btn-primary">Comment</button>
-                                    </div>
+                <form onSubmit={handleSubmit}>
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text">Product Name</span>
+                                    </label>
+                                    <input type="text" placeholder="Name" name='name' className="input w-96 input-bordered" />
+                                </div>
 
-                                    <div className="form-control mt-6">
-                                    </div>
-                                </form>
-                            </>
-                            :
-                            <>
-                                 <Link to='/signIn'> <p>Please log in for comment</p> Log in</Link>
-                            </>
-                    }
-                </div>
+
+       
+                                <div className="form-control mt-6">
+                                    <button className="btn w-96 btn-primary">Comment Add</button>
+                                </div>
+
+                                
+                            </form>
 
             </div>
 
         // </div>
     );
 };
+
 
 export default SingleService;
 

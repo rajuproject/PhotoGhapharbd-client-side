@@ -13,7 +13,7 @@ const AllProducts = () => {
     
 
     useEffect(() => {
-    fetch('http://localhost:5000/product')
+    fetch('http://localhost:5000/product?limit=3')
     .then(res=> res.json())
     .then(data =>{
         if(data.success){
@@ -59,7 +59,7 @@ const AllProducts = () => {
 
 
 <PhotoProvider>
-      <PhotoView src="/1.jpg">
+      <PhotoView src={product.image}>
       <img src={product.image}  alt={product.name}/>
       </PhotoView>
     </PhotoProvider>
