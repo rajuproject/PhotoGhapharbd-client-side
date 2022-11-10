@@ -6,16 +6,16 @@ const EditProduct = () => {
 
 
     const router = useParams();
-    const [product, setProduct] = useState({});
+    const [comment, setComment] = useState({});
     const { id } = router;
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(`http://localhost:5000/product/${id}`)
+        fetch(`http://localhost:5000/comment/${id}`)
           .then((res) => res.json())
           .then((data) => {
             if (data.success) {
-              setProduct(data.data);
+              setComment(data.data);
             } else {
               toast.error(data.error);
             }
@@ -31,7 +31,7 @@ const EditProduct = () => {
           image: e.target.image.value
         }
     
-        fetch(`http://localhost:5000/products/${id}`, {
+        fetch(`http://localhost:5000/comment/${id}`, {
           method: "PATCH",
           headers: {
             "content-type": "application/json"
@@ -41,7 +41,7 @@ const EditProduct = () => {
         .then(data => {
           if(data.success){
             toast.success(data.message);
-            navigate("/allproduct")
+            navigate("/myReview")
           } else {
             toast.err(data.error)
           }
@@ -51,6 +51,7 @@ const EditProduct = () => {
       
       
 
+      
 
     return (
         <div>
@@ -66,9 +67,9 @@ const EditProduct = () => {
                             <form onSubmit={handleSubmit}>
                                 <div className="form-control">
                                     <label className="label">
-                                        <span className="label-text">Product Name</span>
+                                        <span className="label-text">Service Name</span>
                                     </label>
-                                    <input type="text" placeholder="Name" defaultValue={product?.name} name='name' className="input input-bordered" />
+                                    <input type="text" placeholder=" Service Name" defaultValue={comment?.name} name='name' className="input input-bordered" />
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
@@ -83,13 +84,13 @@ const EditProduct = () => {
                                     <label className="label">
                                         <span className="label-text">Image</span>
                                     </label>
-                                    <input type="text" placeholder="Please Link url"  name='image'defaultValue={product?.image} className="input input-bordered" />
+                                    <input type="text" placeholder="Please Link url"  name='image'defaultValue={comment?.image} className="input input-bordered" />
                                     <label className="label">
 
                                     </label>
                                 </div>
                                 <div className="form-control mt-6">
-                                    <button className="btn btn-primary">Product Add</button>
+                                    <button className="btn btn-primary">Comment Update</button>
                                 </div>
                             </form>
                         </div>

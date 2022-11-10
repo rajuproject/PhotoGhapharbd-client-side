@@ -28,16 +28,40 @@ const SignIn = () => {
     signIn(email, password)
       .then(result => {
         const user  = result.user
+
+        console.log(user)
+        
+        const newUser = {
+          email: user.email
+        }
+
+        console.log(newUser)
+
+
+        // get jwt access 
+        fetch('http://localhost:5000/jwt', {
+          method: 'POST',
+          headers:{
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify(newUser)
+        })
+        .then(res =>res.json())
+        .then(data => {
+          console.log(data)
+        })
+
+
         toast.success('Login Success!')
         navigate(from, { replace: true })
         console.log(result.user)
         from.reset()
-        if(user.emailVerified){
-          navigate(from, {replace: true});
-        }
-        else{
-          toast.error('Your email is not verified. Please verified your emali')
-        }
+        // if(user.emailVerified){
+        //   navigate(from, {replace: true});
+        // }
+        // else{
+        //   toast.error('Your email is not verified. Please verified your emali')
+        // }
       //  setError('')
       })
       .catch(error => toast.error(error.message))

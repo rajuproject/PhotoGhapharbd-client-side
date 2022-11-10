@@ -8,6 +8,7 @@ import ProductsAdd from "../../Products add/ProductsAdd";
 import Register from "../../Register/Register";
 import SignIn from "../../SignIn/SignIn";
 import SingleService from "../../SingleService/SingleService";
+import PrivateRoute from '../../PrivateRoute/PrivateRoute'
 
 
 const { createBrowserRouter } = require("react-router-dom");
@@ -26,14 +27,14 @@ export const routes = createBrowserRouter([
             },
             {
                 path:'/add',
-                element:<ProductsAdd></ProductsAdd>
+                element:<PrivateRoute><ProductsAdd></ProductsAdd></PrivateRoute>
             },
             {
                 path:'/allproduct',
                 element:<AllProducts></AllProducts>
             },
             {
-                path: '/product/edit/:id',
+                path: '/comment/:id',
                 element: <EditProduct></EditProduct>
             },
             {

@@ -2,8 +2,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import TitleChange from '../TitleChange/TitleChange';
 
 const ProductsAdd = () => {
+    TitleChange('Service Added')
 
     const navigate = useNavigate();
 

@@ -74,12 +74,12 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 
 <!-- How to added this project  -->
-1. 3 Service page in homepage
-2. All service page minimum 6 service added
-3. Comment added
-4. Private route added
-5. log in, create log in, github and google verification added for sign up 
-6. server side added
-7. mongodb added
-8. all code push in github
-9. password secure with jwt
+* 3 Service page in homepage
+* All service page minimum 6 service added
+* Comment added
+* Private route added
+* log in, create log in, github and google verification added for sign up 
+* server side added
+* mongodb added
+* all code push in github
+* password secure with jwt
