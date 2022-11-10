@@ -12,6 +12,7 @@ import image4 from '../../assets/images/banner/Food-Photography-1.jpg'
 import image5 from '../../assets/images/banner/Industrial-Photography-min.jpg'
 import image6 from '../../assets/images/banner/Product-Photography-min.jpg'
 import TitleChange from '../../TitleChange/TitleChange';
+import { PhotoProvider, PhotoView } from 'react-photo-view';
 
 const Home = () => {
 
@@ -80,7 +81,12 @@ const Home = () => {
               return (
                 <Card
                   key={product._id}>
-                  <img className="image" src={product.image} alt={product.name} />
+                    <PhotoProvider>
+      <PhotoView src={product.image}>
+      <img className="image" src={product.image} alt={product.name} />
+      </PhotoView>
+    </PhotoProvider>
+                 
 
 
                   <a href="#">
