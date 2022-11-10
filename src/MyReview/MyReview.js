@@ -11,9 +11,34 @@ const MyReview = () => {
     TitleChange('My review')
     const router = useParams();
     const [comments, setComment] = useState([])
-    const { user } = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
     const [refresh, setRefresh] = useState(false)
     const { id } = router;
+
+    console.log(user.email)
+
+
+    // verify jwt ...........
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/comment?email=${user?.email}`, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('User-Token')}`
+            }
+        })
+            .then(res => {
+                if (res.status === 401 || res.status === 403) {
+                    logOut()
+                }
+                return res.json()
+            })
+
+            .then(data => { setComment(data) })
+    }, [user?.email]
+    )
+
+
+    // add comment .............
 
 
     const handleSubmit = (e) => {
@@ -28,9 +53,6 @@ const MyReview = () => {
 
         }
 
-
-
-
         fetch("http://localhost:5000/comment", {
             method: "POST",
             headers: {
@@ -41,7 +63,7 @@ const MyReview = () => {
             .then(data => {
                 if (data.success) {
                     toast.success(data.message)
-                    // navigate("/allproduct")
+
                 }
                 else {
                     toast.error(data.error);
@@ -54,7 +76,7 @@ const MyReview = () => {
     }
 
 
-
+    // delete commnet ..................
 
     const handleDelete = (id) => {
         fetch(`http://localhost:5000/comment/${id}`, {
@@ -79,7 +101,7 @@ const MyReview = () => {
 
 
 
-
+    // all comment get ............................
 
     useEffect(() => {
         fetch("http://localhost:5000/comment")
@@ -132,8 +154,8 @@ const MyReview = () => {
                     {
                         comments?.map((comment) => {
                             return (
-                                <tbody className='' 
-                                key={comment.id}>
+                                <tbody className=''
+                                    key={comment.id}>
 
                                     <tr>
                                         <td className='bg-gray-600 mb-10 border-y-8 sm:w-96  rounded '>
@@ -144,7 +166,7 @@ const MyReview = () => {
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    
+
                                                     <div className="text-sm bg-white mb-1 p-2 rounded"> Name: {comment.userName}</div>
                                                     <div className="font-bold bg-white p-2 rounded ">Email: {comment.userEmail}</div>
                                                 </div>
@@ -155,12 +177,12 @@ const MyReview = () => {
                                             <br />
                                             <span className="badge badge-ghost md:w-full sm:w-96  badge-sm">{comment.name}</span>
                                             <div className='flex items-end'>
-                                            <Button className='mt-2 mr-6' onClick={() => handleDelete(comment._id)}>Delete</Button>
-                                            <Button onClick={() => handleDetails(comment._id)}> Comment Edit</Button>
-                                        
+                                                <Button className='mt-2 mr-6' onClick={() => handleDelete(comment._id)}>Delete</Button>
+                                                <Button onClick={() => handleDetails(comment._id)}> Comment Edit</Button>
+
                                             </div>
 
-                                            </td>
+                                        </td>
 
                                     </tr>
 

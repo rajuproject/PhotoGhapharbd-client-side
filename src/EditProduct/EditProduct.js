@@ -10,6 +10,9 @@ const EditProduct = () => {
     const { id } = router;
     const navigate = useNavigate();
 
+
+    // get commnet .....................
+
     useEffect(() => {
         fetch(`http://localhost:5000/comment/${id}`)
           .then((res) => res.json())
@@ -22,6 +25,13 @@ const EditProduct = () => {
           })
           .catch((err) => toast.error(err.message));
       }, [id]);
+
+
+
+
+
+      // set comment .....................
+
 
       const handleSubmit = async (e) => {
         e.preventDefault();

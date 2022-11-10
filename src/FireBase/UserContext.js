@@ -13,19 +13,25 @@ export const AuthContext = createContext();
 
 
 const AuthProvider = ({ children }) => {
-    // const authInfoo = createContext()
+  
+    
+
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(false);
 
     const googleProvider = new GoogleAuthProvider()
-    // google login 
+    
 
     const githubProvider  = new GithubAuthProvider()
+
+    // github sing in 
 
     const githubSignIn = () =>{
         setLoading(true);
         return signInWithPopup(auth, githubProvider);
     }
+
+
 
     const signInWithGoogle = () => {
         setLoading(true);
@@ -47,17 +53,15 @@ const AuthProvider = ({ children }) => {
       }
 
 
-    //   const signInWithGoogle = () => {
-    //     setLoading(true)
-    //     return signInWithPopup(auth, googleProvider)
-    //   }
-
     //   Login with password 
     
     const signIn = (email, password) => {
         setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
     }
+
+
+
 
     const updateUserProfile = (profile) => {
         return updateProfile(auth.currentUser, profile);
@@ -68,6 +72,8 @@ const AuthProvider = ({ children }) => {
         setLoading(true)
         return sendEmailVerification(auth.currentUser);
     }
+
+
 
       //7. Forget Password
   const resetPassword = email => {
@@ -82,11 +88,11 @@ const AuthProvider = ({ children }) => {
         return signOut(auth);
     }
 
+
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
            
-
-            // if(currentUser === null || currentUser.emailVerified){
                 setUser(currentUser);
             
             setLoading(false);
@@ -96,7 +102,9 @@ const AuthProvider = ({ children }) => {
             unsubscribe();
         }
 
-    }, [])
+    }, []);
+
+    
 
     const authInfo = { 
         user, 

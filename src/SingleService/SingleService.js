@@ -1,4 +1,4 @@
-import { Card } from 'flowbite-react';
+import { Button, Card } from 'flowbite-react';
 import { comment } from 'postcss';
 
 import React, { useContext, useEffect, useState } from 'react';
@@ -29,15 +29,7 @@ const SingleService = () => {
     const { id } = router;
     const navigate = useNavigate();
 
-    // const handleDetails = (e) => {
-    //     e.preventDefault();
-    //     const products = {
-    //         comment: e.target.name.value
 
-
-
-
-    //     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -64,7 +56,7 @@ const SingleService = () => {
             .then(data => {
                 if (data.success) {
                     toast.success(data.message)
-                    // navigate("/allproduct")
+                   
                 }
                 else {
                     toast.error(data.error);
@@ -110,7 +102,7 @@ const SingleService = () => {
 
 
 
-    // key={product._id}
+    
 
     return (
         <div>
@@ -182,13 +174,6 @@ const SingleService = () => {
             </Card>
 
 
-
-
-            {/* <div>
-
-           
-            </div> */}
-{/* <div> */}
     
 
             {
@@ -212,20 +197,22 @@ const SingleService = () => {
                         </form>
                     </>
                     :
-                    <>
-                        <p> Please Log in for Comment <Link to="/signIn">Log in</Link> </p>
-                    </>
+                    <div className='container ml-10 my-6 bg-slate-500 w-96 p-4'>
+                        <p className=' text-white'> Please Log in for Comment writting... <Button><Link to="/signIn">Log in</Link></Button> </p>
+                    </div>
             }
-            {/* </div> */}
+            
+
+            
            <>
             {
                     comments.map((comment) => { 
                         return (
-                            <div className='container mx-auto flex my-10'>
-                                <img className="mask mask-squircle w-12 mr-4" src="https://placeimg.com/160/160/arch" />
-                                <div>
-                                    <h3>{user?.displayName}</h3>
-                                    <p>{comment?.name}</p>
+                            <div className='container bg-blue-700 border-2 p-3 rounded border-indigo-600 ml-10 flex w-96 my-10'>
+                                <img className="mask mask-squircle w-12 p- mr-4" src="https://placeimg.com/160/160/arch" />
+                                <div className=''>
+                                    <h3 className='text-white'>User Name: {user?.displayName}</h3>
+                                    <p className='text-white' > Comment: {comment?.name}</p>
                                 </div>
                             </div>
                         )
@@ -245,25 +232,3 @@ const SingleService = () => {
 export default SingleService;
 
 
-// onClick={() => handleDetails(product._id)}
-// {
-//     user?.uid ?
-//     <>
-//        <form >
-// <div className="form-control">
-// <label className="label">
-//     <span className="label-text">Name</span>
-// </label>
-// <input type="text" placeholder="Enter your comment"  name='name' className="input input-bordered w-96" />
-// <button onClick={handleDetails} className="btn w-32 btn-primary">Comment</button>
-// </div>
-
-// <div className="form-control mt-6">
-// </div>
-// </form>
-//     </>
-//     :
-//     <>
-//     <p>Please log in for comment</p> <Link to='/signIn' className='btn'>Log in</Link>
-//     </>
-// }
