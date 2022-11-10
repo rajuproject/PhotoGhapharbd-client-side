@@ -1,7 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import TitleChange from '../TitleChange/TitleChange'
 
 const ErrorPage = () => {
+
+  TitleChange('ErrorPage')
   return (
     <section className='flex items-center h-screen p-16 bg-gray-100 text-gray-900'>
       <div className='container flex flex-col items-center justify-center px-5 mx-auto my-8'>

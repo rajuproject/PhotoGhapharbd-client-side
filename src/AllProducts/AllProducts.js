@@ -5,15 +5,18 @@ import 'react-photo-view/dist/react-photo-view.css';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import TitleChange from '../TitleChange/TitleChange';
 
 const AllProducts = () => {
+
+  TitleChange('All Service')
 
     const [products, setProducts] = useState([]);
     const [refresh, setRefresh] = useState(false)
     
 
     useEffect(() => {
-    fetch('http://localhost:5000/product?limit=3')
+    fetch('http://localhost:5000/product')
     .then(res=> res.json())
     .then(data =>{
         if(data.success){

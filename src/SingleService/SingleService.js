@@ -6,11 +6,14 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../FireBase/UserContext';
+import TitleChange from '../TitleChange/TitleChange';
 
 
 
 
 const SingleService = () => {
+    TitleChange('Details')
+    
     const {user} = useContext(AuthContext);
 
 
@@ -20,7 +23,7 @@ const SingleService = () => {
     const [product, setProduct] = useState({});
 
     const [comment, setComment] = useState({});
-    
+    console.log(comment)
 
     const { id } = router;
     const navigate = useNavigate();
@@ -181,15 +184,17 @@ const SingleService = () => {
             <div className='container mx-auto flex my-10'>
                 <img className="mask mask-squircle w-12 mr-4" src="https://placeimg.com/160/160/arch" />
                 <div>
-                    <h3>Khairul Ahmed</h3>
-                    <p>this photographar awesome work</p>
+                    <h3>{user?.displayName}</h3>
+                    <p>{comment?.name}</p>
                 </div>
             </div>
-
-                <form onSubmit={handleSubmit}>
+{
+    user?.uid?
+    <>
+<form onSubmit={handleSubmit}>
                                 <div className="form-control">
                                     <label className="label">
-                                        <span className="label-text">Product Name</span>
+                                        <span className="label-text">Comment</span>
                                     </label>
                                     <input type="text" placeholder="Name" name='name' className="input w-96 input-bordered" />
                                 </div>
@@ -202,6 +207,13 @@ const SingleService = () => {
 
                                 
                             </form>
+    </>
+    :
+    <>
+    <p> Please Log in for Comment <Link to="/signIn">Log in</Link> </p>
+    </>
+}
+                
 
             </div>
 

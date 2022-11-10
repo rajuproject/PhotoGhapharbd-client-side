@@ -2,6 +2,7 @@ import AllProducts from "../../AllProducts/AllProducts";
 import Blogs from "../../Blogs/Blogs";
 import EditProduct from "../../EditProduct/EditProduct";
 import ErrorPage from "../../ErrorPage/ErrorPage";
+import MyReview from "../../MyReview/MyReview";
 
 import ProductsAdd from "../../Products add/ProductsAdd";
 import Register from "../../Register/Register";
@@ -50,6 +51,10 @@ export const routes = createBrowserRouter([
             {
                 path:'/blogs',
                 element:<Blogs></Blogs>
+            },
+            {
+                path:'/myreview',
+                element:<MyReview></MyReview>
             }
         ]
     }

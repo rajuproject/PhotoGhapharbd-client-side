@@ -1,6 +1,9 @@
 import React from 'react';
+import TitleChange from '../TitleChange/TitleChange';
 
 const Blogs = () => {
+
+	TitleChange('Blogs')
     return (
         <div>
             <section className="dark:bg-gray-800 dark:text-gray-100">

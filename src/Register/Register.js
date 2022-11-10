@@ -4,10 +4,13 @@ import React, { useContext } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { AuthContext } from '../FireBase/UserContext'
+import TitleChange from '../TitleChange/TitleChange'
 
 
 
 const Register = () => {
+
+  TitleChange('Register')
 
   const navigate = useNavigate()
   const location = useLocation()

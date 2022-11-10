@@ -2,10 +2,11 @@ import React, { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../FireBase/UserContext';
+import TitleChange from '../TitleChange/TitleChange';
 
 const SignIn = () => {
 
-
+  TitleChange('Signin')
     const [userEmail, setUserEmail] = useState('')
 
     const navigate = useNavigate()

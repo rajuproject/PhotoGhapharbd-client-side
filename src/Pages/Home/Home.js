@@ -11,8 +11,11 @@ import image3 from '../../assets/images/banner/Fashion-Photography-min.jpg'
 import image4 from '../../assets/images/banner/Food-Photography-1.jpg'
 import image5 from '../../assets/images/banner/Industrial-Photography-min.jpg'
 import image6 from '../../assets/images/banner/Product-Photography-min.jpg'
+import TitleChange from '../../TitleChange/TitleChange';
 
 const Home = () => {
+
+  TitleChange('Home')
   const [porducts, setProducts] = useState([]);
 
   const [refresh, setRefresh] = useState(false)
@@ -83,7 +86,12 @@ const Home = () => {
                   <a href="#">
 
                     <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                      {product.details}
+                      {product.details.length> 100 ?
+                      <> {product.details.slice(0, 100) + '...' }
+                      </>:
+                      product.details
+                      
+                      }
                     </h5>
                   </a>
                   <div className="mt-2.5 mb-5 flex items-center">
