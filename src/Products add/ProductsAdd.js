@@ -11,33 +11,34 @@ const ProductsAdd = () => {
         e.preventDefault();
         const products = {
             name: e.target.name.value,
-            // price: parseInt(e.target.price.value),
-            // image: e.target.image.value,
+            price: parseInt(e.target.price.value),
+            image: e.target.image.value,
+            details:e.target.details.value
 
         }
         console.log(products)
-    //     fetch("http://localhost:5000/product", {
-    //         method:"POST",
-    //         headers:{
-    //             'content-type': 'application/json'
-    //         },
-    //         body:JSON.stringify(products)
-    //     }).then(res => res.json())
-    //         .then(data =>{
-    //             if(data.success){
-    //                 toast.success(data.message)
-    //                 navigate("/allproduct")
-    //             }
-    //             else{
-    //                 toast.error(data.error);
-    //             }
-    //         })
-    //         .catch(err =>{
-    //             toast.error(err.message)
-    //         })
+        fetch("http://localhost:5000/product", {
+            method:"POST",
+            headers:{
+                'content-type': 'application/json'
+            },
+            body:JSON.stringify(products)
+        }).then(res => res.json())
+            .then(data =>{
+                if(data.success){
+                    toast.success(data.message)
+                    navigate("/allproduct")
+                }
+                else{
+                    toast.error(data.error);
+                }
+            })
+            .catch(err =>{
+                toast.error(err.message)
+            })
 
 
-    // }
+    
     }
 
 
@@ -59,7 +60,7 @@ const ProductsAdd = () => {
                                     </label>
                                     <input type="text" placeholder="Name" name='name' className="input input-bordered" />
                                 </div>
-                                {/* <div className="form-control">
+                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Price</span>
                                     </label>
@@ -67,8 +68,8 @@ const ProductsAdd = () => {
                                     <label className="label">
 
                                     </label>
-                                </div> */}
-                                {/* <div className="form-control">
+                                </div> 
+                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Image</span>
                                     </label>
@@ -76,9 +77,18 @@ const ProductsAdd = () => {
                                     <label className="label">
 
                                     </label>
-                                </div> */}
+                                </div> 
+                                 <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text">Details</span>
+                                    </label>
+                                    <input type="text" placeholder="Enter service details" name='details' className="input input-bordered" />
+                                    <label className="label">
+
+                                    </label>
+                                </div> 
                                 <div className="form-control mt-6">
-                                    <button className="btn btn-primary">Product Add</button>
+                                    <button className="btn btn-primary">Service Add</button>
                                 </div>
                             </form>
                         </div>

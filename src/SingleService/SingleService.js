@@ -13,8 +13,9 @@ import TitleChange from '../TitleChange/TitleChange';
 
 const SingleService = () => {
     TitleChange('Details')
-    
-    const {user} = useContext(AuthContext);
+    const [refresh, setRefresh] = useState(false)
+
+    const { user } = useContext(AuthContext);
 
 
 
@@ -22,9 +23,9 @@ const SingleService = () => {
     const router = useParams();
     const [product, setProduct] = useState({});
 
-    const [comment, setComment] = useState({});
-    console.log(comment)
+    const [comments, setComment] = useState([]);
 
+    console.log(comments)
     const { id } = router;
     const navigate = useNavigate();
 
@@ -33,25 +34,25 @@ const SingleService = () => {
     //     const products = {
     //         comment: e.target.name.value
 
-        
-           
-           
+
+
+
     //     }
-        
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const products = {
             name: e.target.name.value,
             serviceId: id,
-            userName:user.displayName,
-            userEmail:user.email,
-            userPhoto: user.photoURL, 
+            userName: user.displayName,
+            userEmail: user.email,
+            userPhoto: user.photoURL,
 
 
         }
-    
 
-       
+
+
 
         fetch("http://localhost:5000/comment", {
             method: "POST",
@@ -98,23 +99,23 @@ const SingleService = () => {
                     setComment(data.data);
                 } else {
                     toast.error(data.error);
-                
+
                 }
             })
             .catch((err) => toast.error(err.message));
-    }, [id]);
-
-   
+    }, [refresh]);
 
 
-    
 
 
+
+
+    // key={product._id}
 
     return (
         <div>
             <Card className='container mx-auto'
-                key={product._id}>
+            >
                 <img className="" src={product.image} alt={product.name} />
 
 
@@ -181,41 +182,60 @@ const SingleService = () => {
             </Card>
 
 
-            <div className='container mx-auto flex my-10'>
-                <img className="mask mask-squircle w-12 mr-4" src="https://placeimg.com/160/160/arch" />
-                <div>
-                    <h3>{user?.displayName}</h3>
-                    <p>{comment?.name}</p>
-                </div>
-            </div>
-{
-    user?.uid?
-    <>
-<form onSubmit={handleSubmit}>
-                                <div className="form-control">
-                                    <label className="label">
-                                        <span className="label-text">Comment</span>
-                                    </label>
-                                    <input type="text" placeholder="Name" name='name' className="input w-96 input-bordered" />
+
+
+            {/* <div>
+
+           
+            </div> */}
+{/* <div> */}
+    
+
+            {
+                user?.uid ?
+                    <>
+                        <form onSubmit={handleSubmit}>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Comment</span>
+                                </label>
+                                <input type="text" placeholder="Name" name='name' className="input w-96 input-bordered" />
+                            </div>
+
+
+
+                            <div className="form-control mt-6">
+                                <button className="btn w-96 btn-primary">Comment Add</button>
+                            </div>
+
+
+                        </form>
+                    </>
+                    :
+                    <>
+                        <p> Please Log in for Comment <Link to="/signIn">Log in</Link> </p>
+                    </>
+            }
+            {/* </div> */}
+           <>
+            {
+                    comments.map((comment) => { 
+                        return (
+                            <div className='container mx-auto flex my-10'>
+                                <img className="mask mask-squircle w-12 mr-4" src="https://placeimg.com/160/160/arch" />
+                                <div>
+                                    <h3>{user?.displayName}</h3>
+                                    <p>{comment?.name}</p>
                                 </div>
+                            </div>
+                        )
+                    })
+                }
+                </> 
+            
 
 
-       
-                                <div className="form-control mt-6">
-                                    <button className="btn w-96 btn-primary">Comment Add</button>
-                                </div>
-
-                                
-                            </form>
-    </>
-    :
-    <>
-    <p> Please Log in for Comment <Link to="/signIn">Log in</Link> </p>
-    </>
-}
-                
-
-            </div>
+        </div>
 
         // </div>
     );

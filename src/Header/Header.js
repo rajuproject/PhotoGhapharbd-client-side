@@ -43,7 +43,7 @@ const Header = () => {
       <li><Link to="/allproduct">All Service</Link></li>
       <li><Link to="/blogs">Blogs</Link></li>
 
-        <li><Link to="/allproduct">My Review</Link></li>
+        
     </ul>
   </div>
   <div className="navbar-end">
@@ -55,6 +55,9 @@ const Header = () => {
 {
 user?.uid?
 <>
+<Link className='mr-24' to="/myReview">My Review</Link>
+<Link className='mr-24' to="/add">Service add</Link>
+
 <span>{user?.displayName}</span>
 <Button onClick={handleLogOut} className='btn'>Log out</Button>
 
