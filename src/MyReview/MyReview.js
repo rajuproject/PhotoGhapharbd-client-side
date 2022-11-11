@@ -19,66 +19,24 @@ const MyReview = () => {
 
     // verify jwt ...........
 
+
+
+    
     useEffect(() => {
-        fetch(`http://localhost:5000/comment?email=${user?.email}`, {
-            headers: {
-                authorization: `Bearer ${localStorage.getItem('User-Token')}`
-            }
-        })
-            .then(res => {
-                if (res.status === 401 || res.status === 403) {
-                    logOut()
-                }
-                return res.json()
-            })
-
-            .then(data => {setComment(data.data)})
-    }, [user?.email, refresh]
-    )
-    console.log(comments)
-
-
-    // add comment .............
-
-
-    const date = new Date().getTime()
-     
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const products = {
-            name: e.target.name.value,
-            serviceId: id,
-            userName: user.displayName,
-            userEmail: user.email,
-            userPhoto: user.photoURL,
-            time: date
-
-
-        }
-console.log(products)
-
-        fetch("http://localhost:5000/comment", {
-            method: "POST",
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(products)
-        }).then(res => res.json())
-            .then(data => {
+        fetch("http://localhost:5000/comment")
+            .then((res) => res.json())
+            .then((data) => {
+                
                 if (data.success) {
-                    toast.success(data.message)
-
-                }
-                else {
+                    setComment(data.data);
+                } else {
                     toast.error(data.error);
+
                 }
             })
-            .catch(err => {
-                toast.error(err.message)
-            })
+            .catch((err) => toast.error(err.message));
+    }, [refresh]);
 
-    }
 
 
     // delete commnet ..................
@@ -121,14 +79,14 @@ console.log(products)
                     {
                         comments?.map((comment) => {
                             return (
-                                <tbody className=''
+                                <tbody className='border-2 border-indigo-600 mt-3'
                                     key={comment.id}>
 
                                     <tr>
-                                        <td className='bg-gray-600 mb-10 border-y-8 sm:w-96  rounded '>
+                                        <td className=' mb-10  sm:w-96  rounded '>
                                             <div className="flex items-center space-x-3">
                                                 <div className="avatar">
-                                                    <div className="mask mask-squircle w-12 h-12">
+                                                    <div className="mask mask-squircle w-12 h-12 ">
                                                         <img src={user?.photoURL} alt="Avatar Tailwind CSS Component" />
                                                     </div>
                                                 </div>

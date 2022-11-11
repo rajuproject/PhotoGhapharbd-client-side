@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { AuthContext } from '../FireBase/UserContext';
 
-const EditProduct = () => {
+const EditComment = () => {
 
 
     const router = useParams();
     const [comment, setComment] = useState({});
     const { id } = router;
     const navigate = useNavigate();
-
+    const { user } = useContext(AuthContext);
 
     // get commnet .....................
 
@@ -37,8 +38,8 @@ const EditProduct = () => {
         e.preventDefault();
         const product = {
           name: e.target.name.value,
-          price: e.target.price.value,
-          image: e.target.image.value
+          // price: e.target.price.value,
+          // image: e.target.image.value
         }
     
         fetch(`http://localhost:5000/comment/${id}`, {
@@ -68,8 +69,7 @@ const EditProduct = () => {
    <div className="hero min-h-screen bg-base-200">
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <div className="text-center lg:text-left">
-                        <h1 className="text-5xl font-bold">Login now!</h1>
-                        <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+                        <h1 className="text-5xl font-bold">{user?.displayName}</h1>
                     </div>
                     <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
 
@@ -77,11 +77,11 @@ const EditProduct = () => {
                             <form onSubmit={handleSubmit}>
                                 <div className="form-control">
                                     <label className="label">
-                                        <span className="label-text">Service Name</span>
+                                        <span className="label-text">Your New comment </span>
                                     </label>
-                                    <input type="text" placeholder=" Service Name" defaultValue={comment?.name} name='name' className="input input-bordered" />
+                                    <input type="text" placeholder=" Service Name"  name='name' className="input input-bordered" />
                                 </div>
-                                <div className="form-control">
+                                {/* <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Price</span>
                                     </label>
@@ -89,8 +89,8 @@ const EditProduct = () => {
                                     <label className="label">
 
                                     </label>
-                                </div>
-                                <div className="form-control">
+                                </div> */}
+                                {/* <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Image</span>
                                     </label>
@@ -98,7 +98,7 @@ const EditProduct = () => {
                                     <label className="label">
 
                                     </label>
-                                </div>
+                                </div> */}
                                 <div className="form-control mt-6">
                                     <button className="btn btn-primary">Comment Update</button>
                                 </div>
@@ -112,4 +112,4 @@ const EditProduct = () => {
     );
 };
 
-export default EditProduct;
+export default EditComment;

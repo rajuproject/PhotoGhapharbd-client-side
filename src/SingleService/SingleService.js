@@ -32,7 +32,7 @@ const SingleService = () => {
     const navigate = useNavigate();
 
 
-
+    const date = new Date().getTime()
     const handleSubmit = (e) => {
         e.preventDefault();
         const products = {
@@ -41,6 +41,7 @@ const SingleService = () => {
             userName: user.displayName,
             userEmail: user.email,
             userPhoto: user.photoURL,
+            time: date
 
 
         }
@@ -70,8 +71,12 @@ const SingleService = () => {
 
     }
 
+
+    // single  service get 
+
+
     useEffect(() => {
-        fetch(`http://localhost:5000/product/${id}`)
+        fetch(`http://localhost:5000/service/${id}`)
             .then((res) => res.json())
             .then((data) => {
                 console.log(data)
@@ -84,6 +89,9 @@ const SingleService = () => {
             .catch((err) => toast.error(err.message));
     }, [id]);
 
+
+
+    // all comment get 
 
     useEffect(() => {
         fetch(`http://localhost:5000/comment/${id}`)
@@ -117,7 +125,7 @@ const SingleService = () => {
                 <a href="#">
 
                     <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                        {/* {product?.details} */}
+                       
                         khairul
                     </h5>
                 </a>

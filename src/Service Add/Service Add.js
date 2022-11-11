@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import TitleChange from '../TitleChange/TitleChange';
 
-const ProductsAdd = () => {
+const ServiceAdd = () => {
     TitleChange('Service Added')
 
     const navigate = useNavigate();
@@ -19,7 +19,7 @@ const ProductsAdd = () => {
 
         }
         console.log(products)
-        fetch("http://localhost:5000/product", {
+        fetch("http://localhost:5000/service", {
             method:"POST",
             headers:{
                 'content-type': 'application/json'
@@ -55,7 +55,7 @@ const ProductsAdd = () => {
                             <form onSubmit={handleSubmit}>
                                 <div className="form-control">
                                     <label className="label">
-                                        <span className="label-text">Product Name</span>
+                                        <span className="label-text">Service  Name</span>
                                     </label>
                                     <input type="text" placeholder="Name" name='name' className="input input-bordered" />
                                 </div>
@@ -99,4 +99,4 @@ const ProductsAdd = () => {
     );
 };
 
-export default ProductsAdd;
+export default ServiceAdd;

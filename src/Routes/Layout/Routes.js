@@ -1,14 +1,16 @@
 import AllProducts from "../../AllProducts/AllProducts";
 import Blogs from "../../Blogs/Blogs";
-import EditProduct from "../../EditProduct/EditProduct";
+
 import ErrorPage from "../../ErrorPage/ErrorPage";
 import MyReview from "../../MyReview/MyReview";
 
-import ProductsAdd from "../../Products add/ProductsAdd";
+
 import Register from "../../Register/Register";
 import SignIn from "../../SignIn/SignIn";
 import SingleService from "../../SingleService/SingleService";
 import PrivateRoute from '../../PrivateRoute/PrivateRoute'
+import EditComment from "../../EditComment/EditProduct";
+import ServiceAdd from "../../Service Add/Service Add";
 
 
 const { createBrowserRouter } = require("react-router-dom");
@@ -27,15 +29,15 @@ export const routes = createBrowserRouter([
             },
             {
                 path:'/add',
-                element:<PrivateRoute><ProductsAdd></ProductsAdd></PrivateRoute>
+                element:<PrivateRoute><ServiceAdd></ServiceAdd></PrivateRoute>
             },
             {
-                path:'/allproduct',
+                path:'/allService',
                 element:<AllProducts></AllProducts>
             },
             {
                 path: '/comment/:id',
-                element: <EditProduct></EditProduct>
+                element: <EditComment></EditComment>
             },
             {
                 path:'/signIn',
