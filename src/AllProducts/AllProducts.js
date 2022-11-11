@@ -43,6 +43,8 @@ const AllProducts = () => {
       {
         products.map((product) => {
           return (
+<div>
+  
 
 
             // Service card ...............
@@ -123,6 +125,7 @@ const AllProducts = () => {
 
               </div>
             </Card>
+            </div>
           )
         })
       }

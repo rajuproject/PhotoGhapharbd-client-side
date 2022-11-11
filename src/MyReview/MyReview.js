@@ -15,8 +15,7 @@ const MyReview = () => {
     const [refresh, setRefresh] = useState(false)
     const { id } = router;
 
-    console.log(user.email)
-
+  
 
     // verify jwt ...........
 
@@ -33,13 +32,17 @@ const MyReview = () => {
                 return res.json()
             })
 
-            .then(data => { setComment(data) })
-    }, [user?.email]
+            .then(data => {setComment(data.data)})
+    }, [user?.email, refresh]
     )
+    console.log(comments)
 
 
     // add comment .............
 
+
+    const date = new Date().getTime()
+     
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -49,9 +52,11 @@ const MyReview = () => {
             userName: user.displayName,
             userEmail: user.email,
             userPhoto: user.photoURL,
+            time: date
 
 
         }
+console.log(products)
 
         fetch("http://localhost:5000/comment", {
             method: "POST",
@@ -86,6 +91,7 @@ const MyReview = () => {
             .then(data => {
                 if (data.success) {
                     toast.success(data.message);
+
                     setRefresh(!refresh);
                 } else {
                     toast.error(data.error);
@@ -103,50 +109,11 @@ const MyReview = () => {
 
     // all comment get ............................
 
-    useEffect(() => {
-        fetch("http://localhost:5000/comment")
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data)
-                if (data.success) {
-                    setComment(data.data);
-                } else {
-                    toast.error(data.error);
 
-                }
-            })
-            .catch((err) => Toast.error(err.message));
-    }, []);
 
     return (
         <div className='container mx-auto'>
-            <div>
-                {
-                    user?.uid ?
-                        <>
-                            <form className='' onSubmit={handleSubmit}>
-                                <div className="form-control">
-                                    <label className="label">
-                                        <span className="label-text">Comment</span>
-                                    </label>
-                                    <input type="text" placeholder="Enter your review" name='name' className="input w-96 input-bordered" />
-                                </div>
 
-
-
-                                <div className="form-control mt-6">
-                                    <button className="btn w-48 btn-primary">Comment Add</button>
-                                </div>
-
-
-                            </form>
-                        </>
-                        :
-                        <>
-                            <p> Please Log in for Comment <Link to="/signIn"><Button>Log in</Button></Link> </p>
-                        </>
-                }
-            </div>
 
             <div className="overflow-x-auto w-full  ">
                 <table className="table w-full ">
@@ -175,7 +142,7 @@ const MyReview = () => {
                                         <td>
 
                                             <br />
-                                            <span className="badge badge-ghost md:w-full sm:w-96  badge-sm">{comment.name}</span>
+                                            <span className="badge badge-ghost md:w-full sm:w-96 h-24 badge-sm">{comment.name}</span>
                                             <div className='flex items-end'>
                                                 <Button className='mt-2 mr-6' onClick={() => handleDelete(comment._id)}>Delete</Button>
                                                 <Button onClick={() => handleDetails(comment._id)}> Comment Edit</Button>
@@ -194,7 +161,12 @@ const MyReview = () => {
 
 
                 </table>
+                
             </div>
+            {
+                comments.length === 0 && <h1> No Review found</h1>
+            }
+          
         </div>
     );
 };
