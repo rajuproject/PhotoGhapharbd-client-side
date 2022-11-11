@@ -1,4 +1,4 @@
-import { Card } from 'flowbite-react';
+import { Card, Spinner } from 'flowbite-react';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
 
@@ -43,13 +43,18 @@ const AllProducts = () => {
       {
         products.map((product) => {
           return (
+
+
+
 <div>
   
 
 
-            // Service card ...............
+            {/* // Service card ............... */}
 
-
+{
+  products.length === 0 && <Spinner animation="border" variant="primary" />
+}
             <Card
               key={product._id}>
 
