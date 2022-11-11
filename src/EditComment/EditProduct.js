@@ -15,7 +15,7 @@ const EditComment = () => {
     // get commnet .....................
 
     useEffect(() => {
-        fetch(`http://localhost:5000/comment/${id}`)
+        fetch(`https://server-side-rajuproject.vercel.app/comment/${id}`)
           .then((res) => res.json())
           .then((data) => {
             if (data.success) {
@@ -42,7 +42,7 @@ const EditComment = () => {
           // image: e.target.image.value
         }
     
-        fetch(`http://localhost:5000/comment/${id}`, {
+        fetch(`https://server-side-rajuproject.vercel.app/comment/${id}`, {
           method: "PATCH",
           headers: {
             "content-type": "application/json"

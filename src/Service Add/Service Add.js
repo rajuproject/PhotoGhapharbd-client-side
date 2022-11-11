@@ -19,7 +19,7 @@ const ServiceAdd = () => {
 
         }
         console.log(products)
-        fetch("http://localhost:5000/service", {
+        fetch("https://server-side-rajuproject.vercel.app/service", {
             method:"POST",
             headers:{
                 'content-type': 'application/json'

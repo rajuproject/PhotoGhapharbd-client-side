@@ -22,7 +22,7 @@ const Home = () => {
   const [refresh, setRefresh] = useState(false)
 
   useEffect(() => {
-    fetch('http://localhost:5000/service')
+    fetch('https://server-side-rajuproject.vercel.app/service')
       .then(res => res.json())
       .then(data => {
         if (data.success) {

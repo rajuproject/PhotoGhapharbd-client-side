@@ -42,14 +42,8 @@ const SingleService = () => {
             userEmail: user.email,
             userPhoto: user.photoURL,
             time: date
-
-
         }
-
-
-
-
-        fetch("http://localhost:5000/comment", {
+        fetch("https://server-side-rajuproject.vercel.app/comment", {
             method: "POST",
             headers: {
                 'content-type': 'application/json'
@@ -59,7 +53,7 @@ const SingleService = () => {
             .then(data => {
                 if (data.success) {
                     toast.success(data.message)
-                   
+                   setRefresh(!refresh)
                 }
                 else {
                     toast.error(data.error);
@@ -76,7 +70,7 @@ const SingleService = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/service/${id}`)
+        fetch(`https://server-side-rajuproject.vercel.app/service/${id}`)
             .then((res) => res.json())
             .then((data) => {
                 console.log(data)
@@ -94,7 +88,7 @@ const SingleService = () => {
     // all comment get 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/comment/${id}`)
+        fetch(`https://server-side-rajuproject.vercel.app/comment/${id}`)
             .then((res) => res.json())
             .then((data) => {
                 

@@ -23,7 +23,7 @@ const MyReview = () => {
 
     
     useEffect(() => {
-        fetch("http://localhost:5000/comment")
+        fetch("https://server-side-rajuproject.vercel.app/comment")
             .then((res) => res.json())
             .then((data) => {
                 
@@ -42,7 +42,7 @@ const MyReview = () => {
     // delete commnet ..................
 
     const handleDelete = (id) => {
-        fetch(`http://localhost:5000/comment/${id}`, {
+        fetch(`https://server-side-rajuproject.vercel.app/comment/${id}`, {
             method: "DELETE",
         })
             .then(res => res.json())

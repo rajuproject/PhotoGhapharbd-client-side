@@ -36,8 +36,8 @@ const Register = () => {
 
         updateName(name)
           .then(() => {
-            toast.success('Name Updated')
-
+            toast.success('Successfully Log in')
+            navigate('/')
           })
           .catch(error => {
             toast.error(error.message)
