@@ -13,7 +13,7 @@ const Header = () => {
 
   const handleLogOut = () => {
     logOut()
-    navigate("/allService")
+    navigate("/")
       .then(() => { })
       .catch(error => console.error(error))
   }
