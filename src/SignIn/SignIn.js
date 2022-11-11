@@ -30,6 +30,7 @@ const SignIn = () => {
         const user = result.user
         toast.success('Log in Successfully')
         navigate(from, { replace: true });
+
         const newUser = {
           email: user.email
         }

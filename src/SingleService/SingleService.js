@@ -23,9 +23,11 @@ const SingleService = () => {
     const router = useParams();
     const [product, setProduct] = useState({});
 
+    console.log(product)
+
     const [comments, setComment] = useState([]);
 
-    console.log(comments)
+
     const { id } = router;
     const navigate = useNavigate();
 
@@ -72,8 +74,9 @@ const SingleService = () => {
         fetch(`http://localhost:5000/product/${id}`)
             .then((res) => res.json())
             .then((data) => {
+                console.log(data)
                 if (data.success) {
-                    setProduct(data.data);
+                    setProduct(data.data[0]);
                 } else {
                     toast.error(data.error);
                 }
@@ -86,7 +89,7 @@ const SingleService = () => {
         fetch(`http://localhost:5000/comment/${id}`)
             .then((res) => res.json())
             .then((data) => {
-                console.log(data)
+                
                 if (data.success) {
                     setComment(data.data);
                 } else {
@@ -114,7 +117,8 @@ const SingleService = () => {
                 <a href="#">
 
                     <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                        {product.details}
+                        {/* {product?.details} */}
+                        khairul
                     </h5>
                 </a>
                 <div className="mt-2.5 mb-5 flex items-center">
@@ -184,7 +188,7 @@ const SingleService = () => {
                                 <label className="label">
                                     <span className="label-text">Comment</span>
                                 </label>
-                                <input type="text" placeholder="Name" name='name' className="input w-96 input-bordered" />
+                                <input type="text" placeholder="Enter your comment " name='name' className="input w-96 input-bordered" />
                             </div>
 
 
